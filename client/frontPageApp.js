@@ -1,20 +1,17 @@
-var frontPageApp = angular.module('frontPage', []);
+// create angular app
+var validationApp = angular.module('frontPageApp', []);
 
-.controller("frontPageController", function($scope){
+// create angular controller
+validationApp.controller('frontPageController', function($scope) {
 
-	
+	// function to submit the form after all validation has occurred			
+	$scope.submitForm = function(isValid) {
+
+		// check to make sure the form is completely valid
+		if (isValid) { 
+			alert('our form is amazing');
+		}
+
+	};
 
 });
-
-
-// Firebase is dependency in this module
-// Allows access to $firebase service from your controllers, factories, and services.
-
-var myApp = angular.module('frontPageApp', ['firebase']);
-
-.controller('frontPageController', ['$scope', '$firebase', function(){
-	function($scope, $firebase) {
-		var ref = new Firebase('https://rkl88y2k0cy.firebaseio-demo.com/');
-		$scope.messages = $firebase(ref).$asArray();
-	}
-}])
