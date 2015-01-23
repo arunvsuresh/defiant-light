@@ -1,25 +1,60 @@
-</html>
-	<title>Title</title>
-	<head>
-		
-	</head>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <style>
+        body     { padding-top:30px; }
+    </style>
+    
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://code.angularjs.org/1.2.6/angular.js"></script>
+    <script src="frontPageApp.js"></script>
 
-	<body ng-app="frontPage">
-	<h2>Enter your email and Bitcoin ID below:</h2>
-	<div ng-controller='frontPageController'>
-		
-		<form method='POST'>
+</head>
+<body ng-app="frontPageApp" ng-controller="frontPageController">
+<div class="container"  id="formContainer" ng-model="formContainer">
+    <!-- <div class="" ng-show> -->
+    <!-- PAGE HEADER -->
+    <div class="page-header" ng-show="showPurchaseTitle"><h1>Make a Purchase</h1></div>
+    
+    <!-- FORM ============================================================== -->
+    
+	<p ng-show="showConfirmationTitle">Thank you for your order. As soon as we receive payment, you will be sent an email!</p>
+    <!-- pass in the variable if our form is valid or invalid -->
+    
+    <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate ng-show="showPurchaseTitle">
+        
+        <!-- USERNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.bitCoinId.$invalid && !userForm.bitCoinId.$pristine }">
+            <label>BitCoinID</label>
+            <input type="text" name="bitCoinId" class="form-control" ng-model="user.bitCoinId" ng-minlength="3" ng-maxlength="20" required>
+        </div>
+            
+        <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" ng-model="user.email">
+            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block" required>Enter a valid email.</p>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" ng-click="updateConfirmation()" id="submitButton">Purchase</button>
+        
+    </form>
+    
+</div>
+    <script type='text/javascript'>
+    // $(document).ready(function(){
+    // 	$("#submitButton").on('click', function(){
+    // 		var d = '';
+    // 		d += '<p>Thank you for your order. As soon as we receive payment, you will be sent an email!</p>';
+    // 		$("#formContainer").html(d); 
+    // 	});
 
-			<div>email: <input ng-model='email'></input></div>
+    // });
 
-			<div>BitcoinID: <input ng-model='bitcoinId'></input></div>
-
-		</form>
-
-	</div>
-
-
-	</body>
-
-
+    </script>
+    
+</body>
 </html>
