@@ -3,8 +3,13 @@ var validationApp = angular.module('frontPageApp', []);
 
 // create angular controller
 validationApp.controller('frontPageController', function($scope) {
+	
 	$scope.showPurchaseTitle = true;
 	$scope.showConfirmationTitle = false;
+
+	$scope.user = {
+		
+	}
 	//$scope.formContainer;
 	// function to submit the form after all validation has occurred			
 	$scope.submitForm = function(isValid) {
@@ -14,8 +19,7 @@ validationApp.controller('frontPageController', function($scope) {
 		// 	alert('our form is amazing');
 		// }
 
-		// if username isValid && bitcoinId isValid
-			// serve up confirmation message
+		
 
 
 	};
@@ -23,8 +27,13 @@ validationApp.controller('frontPageController', function($scope) {
 	$scope.updateConfirmation = function() {
 
 		//var $update = '<div class="updateMessage">' + Please wait while we update the 
-		$scope.showPurchaseTitle = false;
-		$scope.showConfirmationTitle = true;
+
+		if (username && bitcoinId) {
+			$scope.showPurchaseTitle = false;
+			$scope.showConfirmationTitle = true;
+		} else {
+			$scope.showPurchaseTitle = true;
+		}
 
 		//console.log($scope.formContainer);
 		//$scope.formContainer = d;
